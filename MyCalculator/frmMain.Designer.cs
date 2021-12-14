@@ -174,7 +174,7 @@ namespace MyCalculator
             // 
             // btn_MinusAdd
             // 
-            this.btn_MinusAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_MinusAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_MinusAdd.Location = new System.Drawing.Point(152, 223);
             this.btn_MinusAdd.Name = "btn_MinusAdd";
             this.btn_MinusAdd.Size = new System.Drawing.Size(64, 42);
@@ -190,7 +190,6 @@ namespace MyCalculator
             this.btn_Enter.Name = "btn_Enter";
             this.btn_Enter.Size = new System.Drawing.Size(134, 42);
             this.btn_Enter.TabIndex = 15;
-            this.btn_Enter.TabStop = false;
             this.btn_Enter.Text = "=";
             this.btn_Enter.UseVisualStyleBackColor = true;
             // 

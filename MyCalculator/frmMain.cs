@@ -11,6 +11,7 @@ namespace MyCalculator
         Operation lastAction = Operation.None;
         double? num1;
         double? num2;
+        bool modified = false;
 
         #endregion
 
@@ -37,6 +38,7 @@ namespace MyCalculator
             btn_Div.Click += Btn_Operations_Click;
             btn_Enter.Click += Btn_Operations_Click;
 
+            btn_MinusAdd.Click += Btn_MinusAdd_Click;
             btn_Del.Click += Btn_Del_Click;
             btn_AC.Click += Btn_AC_Click;
 
@@ -44,6 +46,24 @@ namespace MyCalculator
 
             txt_Screen.ForeColor = System.Drawing.Color.Black;
             
+        }
+
+
+        #endregion
+
+        #region Btn_MinusAdd_Click
+        private void Btn_MinusAdd_Click(object sender, EventArgs e)
+        {
+            if (txt_Screen.Text != "0" && txt_Screen.Text != "")
+            {
+                if (!txt_Screen.Text.Contains("-"))
+                {
+                    txt_Screen.Text = "-" + txt_Screen.Text;
+                }
+                else
+                    txt_Screen.Text = txt_Screen.Text.Replace("-", "");
+            }
+            btn_Enter.Focus();
         }
         #endregion
 
@@ -99,6 +119,7 @@ namespace MyCalculator
             num1=null;
             num2=null;
             txt_Screen.Text = "0";
+            btn_Enter.Focus();
         }
         #endregion
 
@@ -123,6 +144,7 @@ namespace MyCalculator
             {
                 num2 = txt_Screen.Text.ToDouble(0);
             }
+            btn_Enter.Focus();
 
         }
         #endregion
@@ -170,6 +192,19 @@ namespace MyCalculator
                     break;
             }
 
+            if (modified)
+            {
+                if (num1 == null)
+                {
+                    num1 = txt_Screen.Text.ToDouble(0);
+                }
+                else if (num2 == null)
+                {
+                    num2 = txt_Screen.Text.ToDouble(0);
+                }
+            }
+            
+
             if (num1 != null && num2 != null)
             {
                 returned = MyFunctions.Calc(num1, num2, activeOperation);
@@ -183,13 +218,16 @@ namespace MyCalculator
                         txt_Screen.Text = returned.ToString();
                 }
             }
-
+            modified = false;
+            btn_Enter.Focus();
         }
         #endregion
 
         #region Btn_Numbers_Click
         private void Btn_Numbers_Click(object sender, EventArgs e)
         {
+            modified = true;
+
             string senderText = ((Button)sender).Text.Replace(",",".");
             if (txt_Screen.Text == "0" || lastAction != Operation.None)
                 txt_Screen.Text = "";
@@ -207,19 +245,10 @@ namespace MyCalculator
                 }
                 else
                     txt_Screen.Text += senderText;
-
             }
-
-            if (activeOperation == Operation.None)
-            {
-                num1 = txt_Screen.Text.ToDouble(0);
-            }
-            else
-            {
-                num2 = txt_Screen.Text.ToDouble(0);
-
-            }
+            
             lastAction = Operation.None;
+            btn_Enter.Focus();
 
         }
         #endregion
